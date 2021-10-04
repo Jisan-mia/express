@@ -6,7 +6,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 // ejs template engine
-app.set('View engine', 'ejs')
+app.set('view engine', 'ejs')
 // console.log(app.get('View engine'))
 
 
@@ -27,13 +27,17 @@ app.listen(PORT, () => {
 
 // create home route 
 app.get('/', (req, res) => {
-  res.render(path.resolve(__dirname) + '/index.html')
+  res.render('index', {
+    title: 'Home Page'
+  })
 })
 
 
 // create about route
 app.get('/about', (req, res) => {
-  res.sendFile(path.resolve(__dirname) + '/about.html')
+  res.render('about', {
+    title: 'About Page'
+  })
 })
 
 
