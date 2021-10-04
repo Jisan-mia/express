@@ -3,6 +3,8 @@ const path = require('path')
 
 const app = express() 
 
+const mainRouter = require('./routes/index')
+
 const PORT = process.env.PORT || 3000
 
 // ejs template engine
@@ -18,6 +20,9 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 
+app.use(mainRouter)
+// prefix
+// app.use('/en', mainRouter)
 
 // create server
 app.listen(PORT, () => {
@@ -25,23 +30,25 @@ app.listen(PORT, () => {
 })
 
 
+
+
 // create home route 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
   res.render('index', {
     title: 'Home Page'
   })
 })
-
+ */
 
 // create about route
-app.get('/about', (req, res) => {
+/* app.get('/about', (req, res) => {
   res.render('about', {
     title: 'About Page'
   })
 })
-
+ */
 
 // create download route which will download some file
-app.get('/download', (req, res) => {
+/* app.get('/download', (req, res) => {
   res.download(path.resolve(__dirname) + '/about.html')
-})
+}) */
