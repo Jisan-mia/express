@@ -20,12 +20,14 @@ router.get('/about', (req, res) => {
   })
 })
 
+
+
 router.get('/download', (req, res) => {
   res.download(path.resolve(__dirname) + '/about.html')
 })
 
 // apply middleware to particular route
-router.get('/api/products', apiKeyMiddleware, (req, res) => {
+/* router.get('/api/products', apiKeyMiddleware, (req, res) => {
   res.json([
     {
       id: '123',
@@ -37,6 +39,5 @@ router.get('/api/products', apiKeyMiddleware, (req, res) => {
     },
   ])
 })
-
-
+ */
 module.exports = router

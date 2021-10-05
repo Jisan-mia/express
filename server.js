@@ -5,6 +5,8 @@ const apiKeyMiddleware = require('./middlewares/apiKey')
 const app = express() 
 
 const mainRouter = require('./routes/index')
+const productRouter = require('./routes/products')
+
 
 const PORT = process.env.PORT || 3000
 
@@ -26,6 +28,7 @@ app.use(express.static('public'))
 
 
 app.use(mainRouter)
+app.use(productRouter)
 // every router prefix
 // app.use('/en', mainRouter)
 
