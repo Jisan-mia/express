@@ -1,6 +1,11 @@
 const App = () => {
 
   const [products, setProducts] = React.useState([]);
+  const [formData, setFormData] = React.useState({
+    name: '',
+    price: ''
+  })
+  const [error, setError] = React.useState('')
 
   React.useEffect(() => {
     fetchProducts();
@@ -14,12 +19,55 @@ const App = () => {
       })
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if(!formData.name && formData.price){
+     setError('Invalid name input');
+    } if(!formData.price && formData.name){
+      setError('Invalid price input');
+    } else if (!formData.name && !formData.price) {
+      setError('Invalid name and price input')
+    } else {
+      setError('')
+      alert('success')
+    }
+      
+  }
+
   return (
-    <ul className="list-group ">
+    <>
+    <div className="card">
+      <div className="card-header">
+        Add a Product <span className="color-red">*{error}*</span>
+      </div>
+      <div className="card-body">
+        <form onClick={handleSubmit}>
+          <input 
+          value={formData.name} 
+          onChange={(e) => setFormData({
+            ...formData,
+            name: e.target.value
+          })}type="text" placeholder="Product name" className="form-control mt-3" 
+          />
+          
+          <input value={formData.price} onChange={(e) => setFormData({
+            ...formData,
+            price: e.target.value
+          })} 
+          type="text" placeholder="Product price" className="form-control mt-3"  
+          />
+
+          <button className="btn btn-primary mt-3">Submit</button>
+        </form>
+      </div>
+    </div>
+
+      <ul className="list-group mt-4">
       {
         products.length !== 0 && 
         products.map(product => (
-          <li key={product.id} className="list-group-item border d-flex justify-content-between align-items-center">
+          <li key={product.id} className="list-group-item d-flex justify-content-between align-items-center">
             <div>
               <span className='mr-2 fw-bold'>
               {product.name}: 
@@ -36,6 +84,8 @@ const App = () => {
       }
       
     </ul>
+
+    </>
   )
 }
 
